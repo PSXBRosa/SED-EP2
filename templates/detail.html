@@ -5,6 +5,7 @@
 <div class='mx-auto my-2 d-flex justify-content-around'>
     <a href="{% url 'update' post.slug %}" class="btn btn-dark">Atualizar</a>
     <a href="{% url 'delete' post.slug %}" class="btn btn-dark">Deletar</a>
+    <a href="{% url 'comment' post.id %}" class="btn btn-dark">Comentar</a>
 </div>
 
 <style> h1,h2,h3,p{color: rgb(0, 0, 0) !important;} </style>
@@ -13,5 +14,17 @@
     {{post.content | safe}}
 </div>
     
+
+<div class="col-md-8" id="comments">
+    {% for comment in comments %}
+    <div class="card mb-4" style="background-color: rgb(226, 241, 255);">
+        <div class="card-body">
+            <h2 class="card-title">{{ comment.author }}</h2>
+            <p class="card-text text-muted h6">{{ comment.created_on }} </p>
+            <p class="card-text">{{comment.content}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock content %}
