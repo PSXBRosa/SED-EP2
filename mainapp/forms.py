@@ -9,11 +9,13 @@ class PostForm(ModelForm):
             'title',
             'slug',
             'content',
+            'categories'
         ]
         labels = {
             'title': 'Título',
             'slug': 'Endereço',
             'content': 'Conteúdo',
+            'categories': 'Categorias'
         }
 
 

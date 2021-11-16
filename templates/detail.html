@@ -8,23 +8,29 @@
     <a href="{% url 'comment' post.id %}" class="btn btn-dark">Comentar</a>
 </div>
 
-<style> h1,h2,h3,p{color: rgb(0, 0, 0) !important;} </style>
-<div class='card col-11 mx-auto my-4 p-4'>
-
-    {{post.content | safe}}
+<div class='p-2 masthead'>
+<h3 class='text-white'>Categorias</h3>
+<div class='d-flex justify-content-center'>
+{% for category in post.categories.all %}
+<a class='btn btn-outline-light mx-3' href="/search/?query=&category={{category.id}}">{{category.name}}</a>
+{% endfor %}
 </div>
-    
+</div>
+
+<div class='card col-11 mx-auto my-4 p-4'>
+{{post.content | safe}}
+</div>
 
 <div class="col-md-8" id="comments">
-    {% for comment in comments %}
-    <div class="card mb-4" style="background-color: rgb(226, 241, 255);">
-        <div class="card-body">
-            <h2 class="card-title">{{ comment.author }}</h2>
-            <p class="card-text text-muted h6">{{ comment.created_on }} </p>
-            <p class="card-text">{{comment.content}}</p>
-        </div>
+{% for comment in comments %}
+<div class="card mb-4" style="background-color: rgb(226, 241, 255);">
+    <div class="card-body">
+        <h2 class="card-title">{{ comment.author }}</h2>
+        <p class="card-text text-muted h6">{{ comment.created_on }} </p>
+        <p class="card-text">{{comment.content}}</p>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 </div>
 
 {% endblock content %}

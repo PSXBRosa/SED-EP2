@@ -1,21 +1,47 @@
 {% extends "base.html" %} 
 {% block content %}
 
+<header class="masthead">
+    <div class="mx-4">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="searchbar">
+                    <form action="{% url 'search' %}">
+                        <div class="align-items-center">
+                            <div class="form-row">
+                                <input type="text" name="query" class="form-control" id="searchbar" placeholder="Pesquisa">
+                                <label class="sr-only" for="searchbar">Pesquisa</label>
+                            </div>
+                            {% for category in categories %}
+                            <div class="form-check"> 
+                                <input class="form-check-input" type="checkbox" name="category" value="{{category.id}}" id='{{category.name |cut:" "}}'>
+                                <label class="form-check-label text-white" for='{{category.name |cut:" "}}'>
+                                    {{category.name}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                            <button type="submit" class="btn btn-dark col-auto">Pesquise</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
 <div class="container">
     <div class="row">
-        <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
             {% for post in post_list %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text text-muted h6">{{ post.created_on | date:"SHORT_DATE_FORMAT"}} </p>
-                    <a class="card-text" href="{% url 'detail' post.slug %}">Ver Mais</a>
+                    <a class="card-text btn btn-dark" href="{% url 'detail' post.slug %}">Ver Mais</a>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
-
 {%endblock%}
